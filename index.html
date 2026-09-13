@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecolocate — Weekly Doorstep Waste Collection in Douala</title>
+ <link rel="icon" type="image/png" href="img/logo.png">
+<meta name="description" content="Ecolocate collects your household or business waste every week, right at your gate — by tricycle, across Douala's narrow neighbourhoods.">
+<meta property="og:title" content="Ecolocate — Cleaner Neighbourhoods. One Pickup at a Time.">
+<meta property="og:description" content="Subscription doorstep waste collection in Douala, Cameroon. Chat with us on WhatsApp to subscribe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- Firebase (free tier): Auth for the admin login, Firestore for content and photos -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+</head>
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a href="#home" class="brand"><span class="mark">E</span> Ecolocate</a>
+    <nav class="links" id="navLinks">
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a class="nav-cta" id="navWaBtn" href="#" target="_blank">Chat on WhatsApp</a>
+      <button class="burger" id="burgerBtn">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Cleaner neighbourhoods. One pickup at a time.</h1>
+        <p class="lede">Ecolocate collects your household or small business waste every week — right at your gate, by tricycle, across Douala's narrow streets that big trucks can't reach.</p>
+        <div class="hero-actions">
+          <a class="btn btn-clay" id="heroWaBtn" href="#" target="_blank">💬 Chat with us on WhatsApp</a>
+          <a class="btn btn-outline" href="#pricing">See pricing</a>
+        </div>
+      </div>
+      <div class="hero-img" id="heroImgBox">
+        <img src="img/logo.png" alt="Ecolocate tricycle collecting waste in Douala" id="heroImg">
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS STRIP -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="steps">
+        <div class="step-card"><div class="step-num">1</div><h3>Subscribe</h3><p>Message us on WhatsApp and pick your plan.</p></div>
+        <div class="step-card"><div class="step-num">2</div><h3>Get your day</h3><p>We assign your weekly collection day and time.</p></div>
+        <div class="step-card"><div class="step-num">3</div><h3>We collect</h3><p>Our agent arrives by tricycle and empties your bin.</p></div>
+        <div class="step-card"><div class="step-num">4</div><h3>Reminder</h3><p>A WhatsApp message reminds you the evening before.</p></div>
+      </div>
+      <div class="trust">
+        <div>
+          <h3>Already collecting in Douala</h3>
+          <p id="trustSub">Growing, one neighbourhood at a time.</p>
+        </div>
+        <div class="stat"><span id="statCount">—</span><div style="font-size:.9rem;font-weight:400;color:#DCE6D8;">subscribers served</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING PREVIEW -->
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Simple, honest pricing</h2>
+        <p>No hidden fees. Pay monthly, or prepay a year and get one month free.</p>
+      </div>
+      <div class="grid-3" id="pricingGrid"></div>
+      <p class="money-note">Orange Money and MTN MoMo accepted — pay directly to your agent or via mobile transfer.</p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What subscribers say</h2>
+      </div>
+      <div class="testi-track" id="testiTrack"></div>
+      <div class="testi-nav" id="testiDots"></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS DETAIL -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How it works</h2>
+        <p>One weekly cycle, built for Douala's streets.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card"><h3>Sign up</h3><p>Tell us your neighbourhood and plan on WhatsApp. We confirm your weekly day and time.</p></div>
+        <div class="card"><h3>Collection day</h3><p>Leave your bin at the gate. Our agent arrives on a branded cargo tricycle — narrow enough for any street.</p></div>
+        <div class="card"><h3>If you miss a pickup</h3><p>Message us and we'll fit you into the next available round that week, no extra charge.</p></div>
+      </div>
+
+      <div class="section-head" style="margin-top:56px;">
+        <h3>Why a tricycle?</h3>
+        <p>Big collection trucks can't reach most of Douala's neighbourhoods. Our cargo tricycle can — narrow lanes, tight corners, no problem.</p>
+      </div>
+      <div class="gallery-grid" id="tricycleGallery" style="grid-template-columns:repeat(3,1fr);"></div>
+
+      <div class="section-head" style="margin-top:56px;">
+        <h3>Frequently asked questions</h3>
+      </div>
+      <div id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- COVERAGE -->
+  <section id="coverage">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Where we collect</h2>
+        <p>Currently serving these neighbourhoods in Douala, with more added as we grow.</p>
+      </div>
+      <div class="coverage-list" id="coverageList"></div>
+      <a class="btn btn-outline" id="coverageWaBtn" href="#" target="_blank">Don't see your neighbourhood? Message us</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="founder-photo" id="founderPhotoBox">
+          <span class="placeholder-tag" style="bottom:10px;left:10px;">Upload founder photo</span>
+        </div>
+      </div>
+      <div>
+        <h2>Started because collection wasn't reliable</h2>
+        <p>Ecolocate was founded by Becken Makobi Anne Ferrida after seeing how unreliable formal waste collection was for households across Douala's neighbourhoods — bins left uncollected for weeks, informal dumping, and streets that trucks simply couldn't reach.</p>
+        <p>Today, one tricycle and a trained agent serve paying subscribers every week, with the plan to grow into more neighbourhoods and hire more local agents as the business grows.</p>
+        <h3 style="margin-top:28px;">Our mission</h3>
+        <p>Reliable, affordable doorstep waste collection for every Douala neighbourhood — no matter how narrow the street.</p>
+        <div class="tbl-grid">
+          <div class="card"><h3 style="font-size:1rem;">People</h3><p style="font-size:.9rem;">Local jobs and dignity for agents and their families.</p></div>
+          <div class="card"><h3 style="font-size:1rem;">Planet</h3><p style="font-size:.9rem;">Less illegal dumping and waste burning in neighbourhoods.</p></div>
+          <div class="card"><h3 style="font-size:1rem;">Profit</h3><p style="font-size:.9rem;">A business that can grow and hire more agents over time.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Gallery</h2>
+        <p>Our tricycle, our agents, and the neighbourhoods we serve.</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="wrap">
+    <div class="cta-banner">
+      <h2>Ready for reliable pickup?</h2>
+      <p>Message us on WhatsApp — we'll set up your weekly collection day.</p>
+      <a class="btn btn-clay" id="bannerWaBtn" href="#" target="_blank">💬 Chat with us on WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Get in touch</h2>
+        <p>The fastest way to reach us is WhatsApp — tap below, or fill in the short form and we'll open WhatsApp with your details ready to send.</p>
+        <a class="btn btn-clay" id="contactWaBtn" href="#" target="_blank" style="margin-bottom:28px;">💬 Chat with us on WhatsApp</a>
+        <div class="footer-details">
+          <p><strong>Phone / WhatsApp:</strong> <span id="footPhone"></span></p>
+          <p><strong>Email:</strong> beckenanne1@gmail.com</p>
+          <p><strong>Location:</strong> Douala, Cameroon</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="field"><label>Name</label><input type="text" id="fName" placeholder="Your name"></div>
+        <div class="field"><label>Phone number</label><input type="text" id="fPhone" placeholder="6XX XXX XXX"></div>
+        <div class="field"><label>Neighbourhood</label><input type="text" id="fHood" placeholder="e.g. Bonamoussadi"></div>
+        <div class="field">
+          <label>I am a</label>
+          <select id="fType"><option>Household</option><option>Small Business</option></select>
+        </div>
+        <button class="btn btn-clay" id="fSubmit" style="width:100%;justify-content:center;">Send via WhatsApp</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div class="footer-col">
+      <h4>Ecolocate</h4>
+      <p>Community waste collection service.<br>Douala, Cameroon.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p id="footPhone2"></p>
+      <p>beckenanne1@gmail.com</p>
+    </div>
+    <div class="footer-col">
+      <h4>Registration</h4>
+      <p>RCCM registration on file.<br>Douala, Littoral, Cameroon.</p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:26px;">
+    <a href="#" class="admin-link" id="openAdminLink">Admin</a>
+  </div>
+</footer>
+
+<a class="fab-wa" id="fabWaBtn" href="#" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" width="30" height="30" fill="#fff"><path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.4.7 4.7 1.9 6.7L3 29l6.8-2.1c1.9 1 4 1.6 6.2 1.6 7 0 12.7-5.7 12.7-12.7C28.7 8.7 23 3 16 3zm0 23c-2 0-3.9-.5-5.5-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4C5.9 19.6 5.3 17.7 5.3 15.7 5.3 9.8 10.1 5 16 5s10.7 4.8 10.7 10.7S21.9 26 16 26zm5.9-8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-.9 1.2-.3.2-.6.1c-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">×</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-box">
+    <button class="admin-close" id="adminCloseBtn">×</button>
+
+    <div id="adminLoginView">
+      <h2>Admin login</h2>
+      <p>Sign in to edit the site's photos, pricing, coverage areas and testimonials.</p>
+      <div class="field"><label>Email</label><input type="email" id="adminEmailInput" autocomplete="username"></div>
+      <div class="field"><label>Password</label><input type="password" id="adminPassInput" autocomplete="current-password"></div>
+      <button class="btn btn-clay" id="adminLoginBtn">Log in</button>
+      <p id="adminLoginError" style="color:#a3372c;font-size:.85rem;"></p>
+      <p style="font-size:.8rem;color:var(--ink-soft);">This account is created once in your Firebase console — see setup instructions.</p>
+    </div>
+
+    <div id="adminPanelView" style="display:none;">
+      <h2>Admin panel</h2>
+      <p style="font-size:.88rem;">Changes save instantly and are visible to every visitor.</p>
+
+      <div class="admin-section">
+        <h4>WhatsApp number</h4>
+        <div class="admin-row">
+          <input type="text" id="adminWaNumber" placeholder="237682835293">
+          <button class="mini-btn" data-save="whatsapp">Save</button>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h4>Subscriber stat</h4>
+        <div class="admin-row">
+          <input type="text" id="adminStatCount" placeholder="e.g. 42">
+          <input type="text" id="adminStatSub" placeholder="Short line, e.g. Serving 6 neighbourhoods">
+          <button class="mini-btn" data-save="stat">Save</button>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h4>Photos</h4>
+        <div class="img-upload-row"><img class="img-preview" id="prevHero"><span>Hero photo</span><input type="file" accept="image/*" data-img="hero"></div>
+        <div class="img-upload-row"><img class="img-preview" id="prevFounder"><span>Founder photo</span><input type="file" accept="image/*" data-img="founder"></div>
+        <p style="font-size:.85rem;font-weight:600;margin-top:16px;">Gallery photos</p>
+        <div id="adminGalleryList"></div>
+        <div class="img-upload-row"><span>Add photo</span><input type="file" accept="image/*" id="adminGalleryAdd"></div>
+      </div>
+
+      <div class="admin-section">
+        <h4>Pricing tiers</h4>
+        <div id="adminPricingList"></div>
+      </div>
+
+      <div class="admin-section">
+        <h4>Coverage neighbourhoods</h4>
+        <div id="adminHoodList"></div>
+        <div class="admin-row"><input type="text" id="adminHoodNew" placeholder="Add a neighbourhood"><button class="mini-btn" id="adminHoodAddBtn">Add</button></div>
+      </div>
+
+      <div class="admin-section">
+        <h4>Testimonials</h4>
+        <div id="adminTestiList"></div>
+        <button class="mini-btn" id="adminTestiAddBtn">+ Add testimonial</button>
+      </div>
+
+      <div class="admin-section">
+        <h4>Change admin password</h4>
+        <div class="admin-row">
+          <input type="password" id="adminNewPass" placeholder="New password (min 6 characters)">
+          <button class="mini-btn" id="adminChangePassBtn">Update</button>
+        </div>
+        <p style="font-size:.8rem;color:var(--ink-soft);">To add a second admin or reset a forgotten password, do it from the Firebase console under Authentication.</p>
+      </div>
+
+      <div class="admin-section" style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="save-msg" id="adminSaveMsg"></span>
+        <button class="mini-btn" id="adminLogoutBtn">Log out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
